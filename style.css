@@ -5,193 +5,128 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #0d0d1a;
   min-height: 100vh;
   min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  color: #fff;
-  overflow-x: hidden;
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* --- Blobs animés en arrière-plan --- */
-.bg-blobs {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.45;
-  animation: float 8s ease-in-out infinite;
-}
-
-.blob-1 {
-  width: 420px;
-  height: 420px;
-  background: #ff6fd8;
-  top: -100px;
-  left: -80px;
-  animation-delay: 0s;
-}
-
-.blob-2 {
-  width: 380px;
-  height: 380px;
-  background: #3b82f6;
-  bottom: -80px;
-  right: -80px;
-  animation-delay: -3s;
-}
-
-.blob-3 {
-  width: 300px;
-  height: 300px;
-  background: #facc15;
-  top: 50%;
-  left: 55%;
-  transform: translate(-50%, -50%);
-  animation-delay: -5s;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50%       { transform: translateY(-30px) scale(1.05); }
-}
-
-/* --- Layout --- */
-.container {
-  flex: 1;
+/* --- Fond dégradé animé --- */
+.fullscreen-link {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  min-height: 100vh;
+  min-height: 100dvh;
+  text-decoration: none;
+  cursor: pointer;
+  background: linear-gradient(
+    135deg,
+    #ff6fd8,
+    #a855f7,
+    #3b82f6,
+    #06b6d4,
+    #facc15,
+    #f97316,
+    #ff6fd8
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 8s ease infinite;
+  position: relative;
+}
+
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Overlay sombre pour lisibilité du texte */
+.fullscreen-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+/* --- Contenu centré --- */
+.content {
   position: relative;
   z-index: 1;
-}
-
-/* --- Card --- */
-.card {
-  background: rgba(255, 255, 255, 0.07);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 28px;
-  padding: 3rem 2.5rem;
   text-align: center;
-  max-width: 480px;
-  width: 100%;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
-  animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  padding: 2rem;
+  user-select: none;
 }
 
-@keyframes popIn {
-  from { opacity: 0; transform: scale(0.88) translateY(20px); }
-  to   { opacity: 1; transform: scale(1) translateY(0); }
+.label {
+  font-size: clamp(0.9rem, 3vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  animation: fadeUp 0.8s ease both;
 }
 
-/* --- Emojis --- */
-.emoji-row {
-  display: flex;
-  justify-content: center;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
-}
-
-.emoji {
-  font-size: 2rem;
-  animation: bounce 2s ease-in-out infinite;
-}
-
-.emoji:nth-child(2) { animation-delay: 0.2s; }
-.emoji:nth-child(3) { animation-delay: 0.4s; }
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-8px); }
-}
-
-/* --- Titre --- */
-h1 {
-  font-size: clamp(2.2rem, 8vw, 3.5rem);
+/* --- Titre lettre par lettre --- */
+.title {
+  font-size: clamp(2.2rem, 10vw, 7rem);
   font-weight: 800;
-  line-height: 1.15;
-  margin-bottom: 0.75rem;
   color: #fff;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  text-shadow: 0 4px 40px rgba(0, 0, 0, 0.4);
 }
 
-.highlight {
-  background: linear-gradient(90deg, #ff6fd8, #facc15, #3b82f6);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shimmer 3s linear infinite;
+.title .letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: letterIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-@keyframes shimmer {
-  0%   { background-position: 0% center; }
-  100% { background-position: 200% center; }
+@keyframes letterIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* --- Sous-titre --- */
-.sub {
-  font-size: 1.05rem;
+/* --- Hint cliquez --- */
+.hint {
+  margin-top: 2.5rem;
+  font-size: clamp(0.8rem, 2.5vw, 1rem);
   color: rgba(255, 255, 255, 0.55);
-  margin-bottom: 2rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  animation: pulse 2.5s ease-in-out infinite;
+  animation-delay: 1.5s;
+  opacity: 0;
 }
 
-/* --- Bouton --- */
-button {
-  padding: 0.85rem 2.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-  border: none;
-  border-radius: 50px;
-  background: linear-gradient(135deg, #ff6fd8, #3b82f6);
-  color: #fff;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 4px 20px rgba(255, 111, 216, 0.4);
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.9; }
 }
 
-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 28px rgba(255, 111, 216, 0.55);
-}
-
-button:active {
-  transform: translateY(0);
-}
-
-/* --- Message réponse --- */
-#message {
-  margin-top: 1.25rem;
-  font-size: 1.15rem;
-  min-height: 1.6rem;
-  font-weight: 500;
-  color: #facc15;
-  animation: fadeSlide 0.4s ease-out;
-}
-
-@keyframes fadeSlide {
-  from { opacity: 0; transform: translateY(6px); }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* --- Footer --- */
-footer {
-  position: relative;
-  z-index: 1;
-  padding: 1rem;
-  text-align: center;
-  font-size: 0.7rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.2);
+/* Effet ripple au clic */
+.ripple {
+  position: fixed;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(0);
+  animation: rippleOut 0.6s linear;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+@keyframes rippleOut {
+  to {
+    transform: scale(6);
+    opacity: 0;
+  }
 }
