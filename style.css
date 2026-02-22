@@ -19,6 +19,15 @@ body {
   padding: 2rem;
 }
 
+#clock {
+  font-size: 3rem;
+  font-weight: 200;
+  letter-spacing: 0.15em;
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
+  font-variant-numeric: tabular-nums;
+}
+
 h1 {
   font-size: 4rem;
   margin-bottom: 1rem;
