@@ -3,148 +3,512 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>avrilterrones.com</title>
+  <title>AKZZZ BARBER — Barbier de confiance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-    html, body {
-      width: 100%;
-      height: 100%;
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e8c96b;
+      --dark: #0d0d0d;
+      --dark-2: #161616;
+      --dark-3: #1f1f1f;
+      --white: #f5f5f5;
+      --gray: #888;
     }
 
+    html { scroll-behavior: smooth; }
+
     body {
+      background: var(--dark);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 2.5rem;
+      background: rgba(13,13,13,0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+
+    .nav-logo {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--white); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: color 0.25s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    #hero {
       min-height: 100vh;
       min-height: 100dvh;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
-      cursor: pointer;
-      background: linear-gradient(135deg, #ff6fd8, #a855f7, #3b82f6, #06b6d4, #facc15, #f97316, #ff6fd8);
-      background-size: 400% 400%;
-      animation: gradientShift 8s ease infinite;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    }
-
-    @keyframes gradientShift {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.38);
-      pointer-events: none;
-    }
-
-    .content {
-      position: relative;
-      z-index: 1;
       text-align: center;
       padding: 2rem;
-      user-select: none;
+      position: relative;
+      overflow: hidden;
     }
 
-    .label {
-      font-size: clamp(0.8rem, 3vw, 1rem);
-      color: rgba(255,255,255,0.65);
-      letter-spacing: 0.3em;
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 110%, rgba(201,168,76,0.12) 0%, transparent 70%),
+        linear-gradient(180deg, #0d0d0d 0%, #111 100%);
+    }
+
+    /* Barber pole animation */
+    .barber-pole {
+      position: absolute;
+      left: 5%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 260px;
+      border-radius: 9px;
+      overflow: hidden;
+      opacity: 0.4;
+    }
+
+    .barber-pole::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        -45deg,
+        #e63946 0px, #e63946 10px,
+        #fff 10px, #fff 20px,
+        #1d3557 20px, #1d3557 30px
+      );
+      animation: poleScroll 3s linear infinite;
+    }
+
+    @keyframes poleScroll {
+      0%   { background-position: 0 0; }
+      100% { background-position: 0 60px; }
+    }
+
+    .barber-pole.right {
+      left: auto;
+      right: 5%;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.78rem;
+      letter-spacing: 0.45em;
       text-transform: uppercase;
-      margin-bottom: 1.2rem;
-      animation: fadeUp 0.7s ease both;
+      color: var(--gold);
+      margin-bottom: 1.4rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.3s forwards;
+    }
+
+    .hero-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(3.5rem, 12vw, 9rem);
+      font-weight: 700;
+      line-height: 0.9;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--white);
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.55s forwards;
+    }
+
+    .hero-title .akzzz { color: var(--gold); }
+
+    .hero-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 1.8rem auto;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.8s forwards;
+    }
+
+    .hero-tagline {
+      font-size: clamp(0.85rem, 2.5vw, 1.1rem);
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      color: rgba(245,245,245,0.6);
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 1s forwards;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      margin-top: 2.8rem;
+      padding: 0.9rem 2.8rem;
+      background: var(--gold);
+      color: var(--dark);
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.25s, transform 0.2s;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 1.2s forwards;
+    }
+
+    .hero-cta:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
     }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(14px); }
+      from { opacity: 0; transform: translateY(24px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    .title {
-      font-size: clamp(2rem, 9vw, 6.5rem);
-      font-weight: 900;
-      color: #fff;
-      letter-spacing: 0.03em;
-      line-height: 1.1;
-      text-shadow: 0 4px 32px rgba(0,0,0,0.5);
-    }
-
-    .letter {
-      display: inline-block;
+    /* ── SCISSORS ICON ── */
+    .scissors-icon {
+      display: block;
+      margin: 0 auto 1.2rem;
       opacity: 0;
-      transform: translateY(36px);
-      animation: letterIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      animation: fadeUp 0.8s ease 0.1s forwards;
     }
 
-    @keyframes letterIn {
-      to { opacity: 1; transform: translateY(0); }
-    }
+    /* ── SECTION SHARED ── */
+    section { padding: 6rem 2rem; }
 
-    .hint {
-      margin-top: 2.5rem;
-      font-size: clamp(0.7rem, 2.5vw, 0.95rem);
-      color: rgba(255,255,255,0.55);
-      letter-spacing: 0.25em;
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.5em;
       text-transform: uppercase;
-      animation: pulse 2.4s ease-in-out infinite 1.8s both;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
     }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 0.35; }
-      50%       { opacity: 0.85; }
+    .section-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
     }
 
-    .ripple {
-      position: fixed;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.22);
-      transform: scale(0);
+    .section-line {
+      width: 50px;
+      height: 2px;
+      background: var(--gold);
+      margin: 0 auto 3rem;
+    }
+
+    .section-line.left { margin-left: 0; }
+
+    /* ── SERVICES ── */
+    #services {
+      background: var(--dark-2);
+      text-align: center;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .service-card {
+      background: var(--dark-3);
+      border: 1px solid rgba(201,168,76,0.1);
+      padding: 2.5rem 1.8rem;
+      transition: border-color 0.3s, transform 0.25s;
+    }
+
+    .service-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+    }
+
+    .service-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .service-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .service-desc {
+      font-size: 0.82rem;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    .service-price {
+      margin-top: 1.2rem;
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-frame {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: var(--dark-3);
+      border: 1px solid rgba(201,168,76,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6rem;
+    }
+
+    .about-frame::before {
+      content: '';
+      position: absolute;
+      top: -12px;
+      left: -12px;
+      right: 12px;
+      bottom: 12px;
+      border: 1px solid var(--gold);
+      opacity: 0.4;
       pointer-events: none;
-      z-index: 9999;
-      animation: rippleOut 0.55s linear forwards;
     }
 
-    @keyframes rippleOut {
-      to { transform: scale(8); opacity: 0; }
+    .about-text p {
+      color: rgba(245,245,245,0.65);
+      font-size: 0.95rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .about-text strong { color: var(--gold); font-weight: 500; }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--dark-2);
+      text-align: center;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .contact-item h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+
+    .contact-item p {
+      font-size: 0.9rem;
+      color: rgba(245,245,245,0.7);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2.5rem 2rem;
+      border-top: 1px solid rgba(201,168,76,0.1);
+      font-size: 0.75rem;
+      color: var(--gray);
+      letter-spacing: 0.15em;
+    }
+
+    footer strong { color: var(--gold); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .barber-pole { display: none; }
+      .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+      section { padding: 4rem 1.5rem; }
     }
   </style>
 </head>
 <body>
-  <div class="overlay"></div>
-  <div class="content">
-    <p class="label">Bienvenue sur</p>
-    <h1 class="title" id="title"></h1>
-    <p class="hint">↗ &nbsp;Cliquez pour visiter</p>
-  </div>
 
-  <script>
-    // Animation lettre par lettre
-    const text = 'avrilterrones.com';
-    const titleEl = document.getElementById('title');
-    text.split('').forEach((char, i) => {
-      const span = document.createElement('span');
-      span.className = 'letter';
-      span.textContent = char;
-      span.style.animationDelay = (0.5 + i * 0.065) + 's';
-      titleEl.appendChild(span);
-    });
+  <!-- NAVBAR -->
+  <nav>
+    <a class="nav-logo" href="#hero">AKZZZ <span>BARBER</span></a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">À propos</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-    // Clic => redirect
-    document.body.addEventListener('click', function(e) {
-      // Ripple
-      const ripple = document.createElement('span');
-      ripple.className = 'ripple';
-      const s = 100;
-      ripple.style.width = ripple.style.height = s + 'px';
-      ripple.style.left = (e.clientX - s / 2) + 'px';
-      ripple.style.top  = (e.clientY - s / 2) + 'px';
-      document.body.appendChild(ripple);
-      ripple.addEventListener('animationend', () => ripple.remove());
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="barber-pole left"></div>
+    <div class="barber-pole right"></div>
 
-      // Redirect
-      setTimeout(() => { window.location.href = 'https://www.avrilterrones.com'; }, 250);
-    });
-  </script>
+    <div class="hero-content">
+      <svg class="scissors-icon" width="38" height="38" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 9C7.65685 9 9 7.65685 9 6C9 4.34315 7.65685 3 6 3C4.34315 3 3 4.34315 3 6C3 7.65685 4.34315 9 6 9Z" stroke="#c9a84c" stroke-width="1.5"/>
+        <path d="M6 21C7.65685 21 9 19.6569 9 18C9 16.3431 7.65685 15 6 15C4.34315 15 3 16.3431 3 18C3 19.6569 4.34315 21 6 21Z" stroke="#c9a84c" stroke-width="1.5"/>
+        <path d="M8.5 7.5L21 12M8.5 16.5L21 12" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+
+      <p class="hero-eyebrow">Barbier professionnel</p>
+      <h1 class="hero-title">
+        <span class="akzzz">AKZZZ</span><br>BARBER
+      </h1>
+      <div class="hero-divider"></div>
+      <p class="hero-tagline">Style &nbsp;·&nbsp; Précision &nbsp;·&nbsp; Confiance</p>
+      <a class="hero-cta" href="#contact">Prendre rendez-vous</a>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <p class="section-label">Ce que je propose</p>
+    <h2 class="section-title">Services</h2>
+    <div class="section-line"></div>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">✂️</div>
+        <div class="service-name">Coupe homme</div>
+        <p class="service-desc">Coupe classique ou moderne, adaptée à votre style et morphologie.</p>
+        <div class="service-price">15 €</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🪒</div>
+        <div class="service-name">Dégradé</div>
+        <p class="service-desc">Dégradé américain, bas ou haut. Finition nette à la tondeuse.</p>
+        <div class="service-price">18 €</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🧔</div>
+        <div class="service-name">Barbe</div>
+        <p class="service-desc">Taille, contour et soin de barbe au rasoir. Look impeccable garanti.</p>
+        <div class="service-price">12 €</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">💈</div>
+        <div class="service-name">Coupe + Barbe</div>
+        <p class="service-desc">Le combo complet pour repartir au top du style.</p>
+        <div class="service-price">25 €</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-inner">
+      <div class="about-visual">
+        <div class="about-frame">💈</div>
+      </div>
+      <div class="about-text">
+        <p class="section-label">Mon histoire</p>
+        <h2 class="section-title" style="text-align:left;">À propos</h2>
+        <div class="section-line left"></div>
+        <p>Bienvenue chez <strong>AKZZZ Barber</strong>, un espace dédié aux hommes qui tiennent à leur image.</p>
+        <p>Chaque coupe est réalisée avec <strong>soin et précision</strong>, en prenant le temps d'écouter vos envies pour un résultat qui vous ressemble vraiment.</p>
+        <p>De la coupe classique au dégradé moderne, je maîtrise toutes les techniques pour sublimer votre style.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label">Venez nous voir</p>
+    <h2 class="section-title">Contact & Horaires</h2>
+    <div class="section-line"></div>
+
+    <div class="contact-grid">
+      <div class="contact-item">
+        <h3>Adresse</h3>
+        <p>À définir</p>
+      </div>
+      <div class="contact-item">
+        <h3>Téléphone</h3>
+        <p>À définir</p>
+      </div>
+      <div class="contact-item">
+        <h3>Horaires</h3>
+        <p>Lun – Sam<br>9h – 19h</p>
+      </div>
+      <div class="contact-item">
+        <h3>Instagram</h3>
+        <p>@akzzzbarber</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <strong>AKZZZ BARBER</strong> &nbsp;·&nbsp; Tous droits réservés © 2025
+  </footer>
+
 </body>
 </html>
