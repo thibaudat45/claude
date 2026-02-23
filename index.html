@@ -3,148 +3,306 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>avrilterrones.com</title>
-  <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html, body {
-      width: 100%;
-      height: 100%;
-    }
-
-    body {
-      min-height: 100vh;
-      min-height: 100dvh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      cursor: pointer;
-      background: linear-gradient(135deg, #ff6fd8, #a855f7, #3b82f6, #06b6d4, #facc15, #f97316, #ff6fd8);
-      background-size: 400% 400%;
-      animation: gradientShift 8s ease infinite;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    }
-
-    @keyframes gradientShift {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.38);
-      pointer-events: none;
-    }
-
-    .content {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      padding: 2rem;
-      user-select: none;
-    }
-
-    .label {
-      font-size: clamp(0.8rem, 3vw, 1rem);
-      color: rgba(255,255,255,0.65);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      margin-bottom: 1.2rem;
-      animation: fadeUp 0.7s ease both;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(14px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .title {
-      font-size: clamp(2rem, 9vw, 6.5rem);
-      font-weight: 900;
-      color: #fff;
-      letter-spacing: 0.03em;
-      line-height: 1.1;
-      text-shadow: 0 4px 32px rgba(0,0,0,0.5);
-    }
-
-    .letter {
-      display: inline-block;
-      opacity: 0;
-      transform: translateY(36px);
-      animation: letterIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    }
-
-    @keyframes letterIn {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .hint {
-      margin-top: 2.5rem;
-      font-size: clamp(0.7rem, 2.5vw, 0.95rem);
-      color: rgba(255,255,255,0.55);
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      animation: pulse 2.4s ease-in-out infinite 1.8s both;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 0.35; }
-      50%       { opacity: 0.85; }
-    }
-
-    .ripple {
-      position: fixed;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.22);
-      transform: scale(0);
-      pointer-events: none;
-      z-index: 9999;
-      animation: rippleOut 0.55s linear forwards;
-    }
-
-    @keyframes rippleOut {
-      to { transform: scale(8); opacity: 0; }
-    }
-  </style>
+  <title>AKZZZ BARBER – Barbershop Premium</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="overlay"></div>
-  <div class="content">
-    <p class="label">Bienvenue sur</p>
-    <h1 class="title" id="title"></h1>
-    <p class="hint">↗ &nbsp;Cliquez pour visiter</p>
+
+  <!-- ===== NAV ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">
+        <span class="logo-scissors">✂</span>
+        <span>AKZZZ<span class="logo-accent"> BARBER</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">À propos</a></li>
+        <li><a href="#galerie">Galerie</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#contact" class="btn btn-gold nav-cta">Réserver</a>
+      <button class="burger" id="burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#services">Services</a>
+      <a href="#about">À propos</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="btn btn-gold">Réserver</a>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <!-- Barber pole décoratif -->
+    <div class="barber-pole" aria-hidden="true">
+      <div class="pole-stripe"></div>
+    </div>
+    <div class="hero-content">
+      <p class="hero-eyebrow reveal">— Barbershop Premium —</p>
+      <h1 class="hero-title reveal-up">
+        <span class="hero-akzzz">AKZZZ</span>
+        <span class="hero-barber">BARBER</span>
+      </h1>
+      <p class="hero-tagline reveal">L'art de la coupe, la tradition du rasage.</p>
+      <div class="hero-actions reveal">
+        <a href="#contact" class="btn btn-gold">Prendre rendez-vous</a>
+        <a href="#services" class="btn btn-outline">Voir les tarifs</a>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- ===== BANDE SLOGAN ===== -->
+  <div class="ticker-wrap" aria-hidden="true">
+    <div class="ticker">
+      <span>✂ Coupe &nbsp;·&nbsp; </span>
+      <span>🪒 Rasage &nbsp;·&nbsp; </span>
+      <span>✂ Barbe &nbsp;·&nbsp; </span>
+      <span>🪒 Dégradé &nbsp;·&nbsp; </span>
+      <span>✂ Coloration &nbsp;·&nbsp; </span>
+      <span>🪒 Soin du visage &nbsp;·&nbsp; </span>
+      <span>✂ Coupe &nbsp;·&nbsp; </span>
+      <span>🪒 Rasage &nbsp;·&nbsp; </span>
+      <span>✂ Barbe &nbsp;·&nbsp; </span>
+      <span>🪒 Dégradé &nbsp;·&nbsp; </span>
+      <span>✂ Coloration &nbsp;·&nbsp; </span>
+      <span>🪒 Soin du visage &nbsp;·&nbsp; </span>
+    </div>
   </div>
 
-  <script>
-    // Animation lettre par lettre
-    const text = 'avrilterrones.com';
-    const titleEl = document.getElementById('title');
-    text.split('').forEach((char, i) => {
-      const span = document.createElement('span');
-      span.className = 'letter';
-      span.textContent = char;
-      span.style.animationDelay = (0.5 + i * 0.065) + 's';
-      titleEl.appendChild(span);
-    });
+  <!-- ===== SERVICES ===== -->
+  <section class="section" id="services">
+    <div class="container">
+      <h2 class="section-title reveal-up">Nos <span class="text-gold">Services</span></h2>
+      <p class="section-sub reveal">Des prestations soignées à des prix justes.</p>
+      <div class="services-grid">
 
-    // Clic => redirect
-    document.body.addEventListener('click', function(e) {
-      // Ripple
-      const ripple = document.createElement('span');
-      ripple.className = 'ripple';
-      const s = 100;
-      ripple.style.width = ripple.style.height = s + 'px';
-      ripple.style.left = (e.clientX - s / 2) + 'px';
-      ripple.style.top  = (e.clientY - s / 2) + 'px';
-      document.body.appendChild(ripple);
-      ripple.addEventListener('animationend', () => ripple.remove());
+        <div class="service-card reveal-up" style="--delay:0s">
+          <div class="service-icon">✂</div>
+          <h3>Coupe Homme</h3>
+          <p>Coupe classique ou moderne, adaptée à votre style. Finitions ciseaux ou tondeuse.</p>
+          <div class="service-price">À partir de <strong>15€</strong></div>
+        </div>
 
-      // Redirect
-      setTimeout(() => { window.location.href = 'https://www.avrilterrones.com'; }, 250);
-    });
-  </script>
+        <div class="service-card reveal-up" style="--delay:0.1s">
+          <div class="service-icon">🪒</div>
+          <h3>Rasage Traditionnel</h3>
+          <p>Rasage au rasoir droit avec serviettes chaudes, mousse artisanale et soins après-rasage.</p>
+          <div class="service-price">À partir de <strong>20€</strong></div>
+        </div>
+
+        <div class="service-card reveal-up" style="--delay:0.2s">
+          <div class="service-icon">🧔</div>
+          <h3>Taille de Barbe</h3>
+          <p>Dessin des contours, taille et mise en forme de la barbe. Inclus un soin hydratant.</p>
+          <div class="service-price">À partir de <strong>12€</strong></div>
+        </div>
+
+        <div class="service-card reveal-up" style="--delay:0.3s">
+          <div class="service-icon">⚡</div>
+          <h3>Dégradé / Fondu</h3>
+          <p>Dégradé américain, skin fade ou drop fade. Un rendu propre et parfaitement fondu.</p>
+          <div class="service-price">À partir de <strong>18€</strong></div>
+        </div>
+
+        <div class="service-card reveal-up" style="--delay:0.4s">
+          <div class="service-icon">🎨</div>
+          <h3>Coloration</h3>
+          <p>Coloration barbe ou cheveux, décoloration, effets tendance. Conseils personnalisés.</p>
+          <div class="service-price">À partir de <strong>25€</strong></div>
+        </div>
+
+        <div class="service-card reveal-up" style="--delay:0.5s">
+          <div class="service-icon">👑</div>
+          <h3>Pack Complet</h3>
+          <p>Coupe + barbe + rasage + soin. L'expérience barbershop premium complète.</p>
+          <div class="service-price">À partir de <strong>40€</strong></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== À PROPOS ===== -->
+  <section class="section about-section" id="about">
+    <div class="container about-grid">
+      <div class="about-visual reveal">
+        <div class="about-img-placeholder">
+          <div class="scissors-big">✂</div>
+          <div class="pole-mini">
+            <div class="pole-mini-stripe"></div>
+          </div>
+        </div>
+        <div class="about-badge">
+          <span class="badge-num">5+</span>
+          <span class="badge-text">Années<br>d'expérience</span>
+        </div>
+      </div>
+      <div class="about-text reveal-up">
+        <h2 class="section-title">À propos<br>d'<span class="text-gold">AKZZZ</span></h2>
+        <p>Bienvenue chez <strong>AKZZZ Barber</strong>, votre barbershop de confiance. Nous fusionnons techniques modernes et savoir-faire traditionnel pour vous offrir une expérience unique à chaque visite.</p>
+        <p>Notre équipe passionnée maîtrise les coupes tendance, les dégradés précis et le rasage traditionnel au rasoir droit. Chaque client repart avec un look taillé sur mesure.</p>
+        <ul class="about-list">
+          <li><span class="check">✓</span> Maîtrise des dégradés & fondus</li>
+          <li><span class="check">✓</span> Produits premium sélectionnés</li>
+          <li><span class="check">✓</span> Ambiance détendue & conviviale</li>
+          <li><span class="check">✓</span> Réservation rapide & flexible</li>
+        </ul>
+        <a href="#contact" class="btn btn-gold">Prendre rendez-vous</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GALERIE ===== -->
+  <section class="section" id="galerie">
+    <div class="container">
+      <h2 class="section-title reveal-up">Notre <span class="text-gold">Galerie</span></h2>
+      <p class="section-sub reveal">Quelques réalisations qui parlent d'elles-mêmes.</p>
+      <div class="gallery-grid">
+        <div class="gallery-item reveal-up" style="--delay:0s">
+          <div class="gallery-placeholder">
+            <span>✂</span>
+            <p>Dégradé skin fade</p>
+          </div>
+        </div>
+        <div class="gallery-item reveal-up" style="--delay:0.1s">
+          <div class="gallery-placeholder">
+            <span>🪒</span>
+            <p>Rasage traditionnel</p>
+          </div>
+        </div>
+        <div class="gallery-item reveal-up" style="--delay:0.2s">
+          <div class="gallery-placeholder">
+            <span>🧔</span>
+            <p>Taille de barbe</p>
+          </div>
+        </div>
+        <div class="gallery-item reveal-up" style="--delay:0.3s">
+          <div class="gallery-placeholder">
+            <span>⚡</span>
+            <p>Drop fade</p>
+          </div>
+        </div>
+        <div class="gallery-item reveal-up" style="--delay:0.4s">
+          <div class="gallery-placeholder">
+            <span>✂</span>
+            <p>Coupe classique</p>
+          </div>
+        </div>
+        <div class="gallery-item reveal-up" style="--delay:0.5s">
+          <div class="gallery-placeholder">
+            <span>👑</span>
+            <p>Pack complet</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT / RÉSERVATION ===== -->
+  <section class="section contact-section" id="contact">
+    <div class="container">
+      <h2 class="section-title reveal-up">Prendre <span class="text-gold">Rendez-vous</span></h2>
+      <p class="section-sub reveal">Réservez votre créneau en ligne ou contactez-nous directement.</p>
+      <div class="contact-grid">
+
+        <div class="contact-info reveal-up">
+          <div class="info-item">
+            <div class="info-icon">📍</div>
+            <div>
+              <strong>Adresse</strong>
+              <p>123 Rue de la Coupe, Paris</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">📞</div>
+            <div>
+              <strong>Téléphone</strong>
+              <p>+33 6 00 00 00 00</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">🕐</div>
+            <div>
+              <strong>Horaires</strong>
+              <p>Lun – Sam : 9h – 20h</p>
+              <p>Dimanche : 10h – 17h</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">📱</div>
+            <div>
+              <strong>Instagram</strong>
+              <p>@akzzz.barber</p>
+            </div>
+          </div>
+        </div>
+
+        <form class="contact-form reveal-up" id="contactForm" style="--delay:0.1s">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Prénom & Nom</label>
+              <input type="text" id="name" name="name" placeholder="Jean Dupont" required />
+            </div>
+            <div class="form-group">
+              <label for="phone">Téléphone</label>
+              <input type="tel" id="phone" name="phone" placeholder="+33 6 00 00 00 00" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="service">Service souhaité</label>
+            <select id="service" name="service">
+              <option value="">Choisir un service...</option>
+              <option>Coupe Homme</option>
+              <option>Rasage Traditionnel</option>
+              <option>Taille de Barbe</option>
+              <option>Dégradé / Fondu</option>
+              <option>Coloration</option>
+              <option>Pack Complet</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message (optionnel)</label>
+            <textarea id="message" name="message" rows="4" placeholder="Précisions sur votre coupe, style souhaité..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-gold btn-full">
+            Envoyer la demande ✂
+          </button>
+          <div class="form-success" id="formSuccess">
+            ✓ Votre message a été envoyé ! Nous vous recontactons rapidement.
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-logo">
+        <span class="logo-scissors">✂</span>
+        AKZZZ <span class="text-gold">BARBER</span>
+      </div>
+      <p class="footer-copy">© 2025 AKZZZ Barber. Tous droits réservés.</p>
+      <div class="footer-socials">
+        <a href="#" aria-label="Instagram">📱</a>
+        <a href="#" aria-label="Facebook">💬</a>
+        <a href="#" aria-label="WhatsApp">📞</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
 </body>
 </html>
